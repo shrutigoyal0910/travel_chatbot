@@ -38,7 +38,7 @@ Chatbot_project/
 🚀 Installation & Setup
 1️⃣ Clone Repository
 
-git clone https://github.com/your-username/travel_chatbot.git
+git clone https://github.com/shrutigoyal0910/travel_chatbot.git
 cd travel_chatbot
 
 2️⃣ Create Virtual Environment & Install Dependencies
@@ -79,4 +79,5 @@ Example messages:
 
 
 
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/fbb90a0e-693e-4514-b11f-3139ba459522" />
 
