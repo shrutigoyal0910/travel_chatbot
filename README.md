@@ -1,5 +1,5 @@
 🌍 Qyra – Travel Assistant Chatbot
-An AI-powered travel assistant chatbot built with Django + Rasa + OpenRouter API.
+/n An AI-powered travel assistant chatbot built with Django + Rasa + OpenRouter API.
 Qyra helps users explore flights, hotels, and travel tips while supporting natural conversations powered by DeepSeek AI model.
 
 ✨ Features
