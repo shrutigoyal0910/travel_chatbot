@@ -85,9 +85,9 @@ Open http://127.0.0.1:8000/ in your browser.
 Login/Signup to your account.
 Start chatting with Qyra – your travel assistant 🚀
 
-Example Messages:
-"hello" → AI greeting + travel suggestions
-"book flight from Delhi to Goa" → Flight booking flow
-"find hotels in Manali" → Hotel search
-"show me travel packages" → Package browsing
-"cancel my booking 1234" → Cancels booking with ID
+#### Example Messages:
+- "hello" → AI greeting + travel suggestions
+- "book flight from Delhi to Goa" → Flight booking flow
+- "find hotels in Manali" → Hotel search
+- "show me travel packages" → Package browsing
+- "cancel my booking 1234" → Cancels booking with ID
