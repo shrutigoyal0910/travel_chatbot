@@ -1,0 +1,35 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+
+# === Virtual environment ===
+venv/
+ENV/
+.env
+env/
+.venv/
+
+# === Django ===
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+migrations/
+
+# === Rasa ===
+models/
+.results/
+.rasa/
+.events.out
+
+# === IDE / System ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

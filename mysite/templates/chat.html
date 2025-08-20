@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Qyra Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Aligned logout -->
+    <div class="logout-bar">
+      <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <!-- Chat UI -->
+    <div class="chat-container">
+      <div class="chat-header">
+        <img src="/static/images/bot.png" alt="Bot Icon" class="bot-header-icon-large" style="height: 100px; width: 100px;">
+        <div class="bot-title-area">
+          <h2>Qyra Bot</h2>
+          <small>Your Travel Assistant</small>
+        </div>
+        <div class="controls">
+          <button class="icon-clear-btn" onclick="clearChat()" title="Clear Chat">×</button>
+        </div>
+      </div>
+
+      <div class="chat-box" id="chatBox"></div>
+
+      <div class="chat-footer">
+      <div class="input-wrapper">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <input type="text" id="userInput" placeholder="Ask me something..." onkeydown="handleKeyPress(event)" />
+        <button onclick="handleSend()">➤</button>
+      </div>
+
+      <div class="footer-nav">
+        <div class="nav-item" id="chatTab" onclick="switchMode('chat')" title="Chat Mode">
+          <img src="https://img.icons8.com/fluency/48/chat.png" alt="Chat Icon" style="width: 35px; height: 35px;" />
+          <small>Chat</small>
+        </div>
+        <div class="nav-item" onclick="startVoiceInput()" title="Voice Input">
+          <img src="https://img.icons8.com/fluency/48/microphone.png" alt="Mic Icon" style="width: 35px; height: 35px;" />
+          <small>Voice</small>
+        </div>
+        <div class="nav-item" id="aiTab" onclick="switchMode('ai')" title="AI Assistant">
+          <img src="https://img.icons8.com/fluency/48/artificial-intelligence.png" alt="AI Icon" style="width: 35px; height: 35px;" />
+          <small>AI</small>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const userAvatarUrl = "{% if user.is_authenticated and user.userprofile.avatar %}{{ user.userprofile.avatar.url }}{% else %}{{ MEDIA_URL }}avatars/default.png{% endif %}";
+    const mediaUrl = "{{ MEDIA_URL }}";
+    let currentMode = localStorage.getItem("chatMode") || "chat";
+
+    function switchMode(mode) {
+      currentMode = mode;
+      localStorage.setItem("chatMode", mode);
+
+      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+      if (mode === "chat") {
+        document.getElementById("chatTab").classList.add("active");
+      } else if (mode === "ai") {
+        document.getElementById("aiTab").classList.add("active");
+      }
+
+      // Clear existing chat and show the new welcome message
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML = "";
+      localStorage.removeItem("chatHistory");
+
+      if (mode === "chat") {
+        appendMessage("bot", "Hi! I'm Qyra, your personal travel assistant. I can help you with:", [
+          { title: "✈️ Book a Flight", payload: "book_flight" },
+          { title: "🏨 Search Hotels", payload: "search_hotels" },
+          { title: "📦 Travel Packages", payload: "show_packages" },
+          { title: "Test API", payload: "test_api" }
+        ]);
+      } else if (mode === "ai") {
+        appendMessage("bot", "Hi! I'm your AI assistant. Ask me anything!");
+      }
+    }
+
+
+    function handleSend() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      if (currentMode === "chat") {
+        sendMessage(message);
+      } else if (currentMode === "ai") {
+        sendAiMessage(message);
+      }
+
+      input.value = "";
+    }
+
+
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleSend();
+      }
+    }
+
+
+    window.onload = () => {
+        const chatHistory = JSON.parse(localStorage.getItem("chatHistory") || "[]");
+
+        if (chatHistory.length > 0) {
+          // Just show past messages, don't trigger switchMode again
+          document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+          if (currentMode === "chat") {
+            document.getElementById("chatTab").classList.add("active");
+          } else if (currentMode === "ai") {
+            document.getElementById("aiTab").classList.add("active");
+          }
+          chatHistory.forEach(({ sender, text, buttons }) => {
+            appendMessage(sender, text, buttons);
+          });
+        } else {
+          // No previous history, show initial welcome message
+          switchMode(currentMode);
+        }
+      };
+
+  </script>
+  <script src="{% static 'js/chat.js' %}"></script>
+  <script>const botAvatarUrl = "{% static 'images/bot.gif' %}";</script>
+
+</body>
+</html>

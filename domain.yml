@@ -1,0 +1,178 @@
+version: "3.1"
+
+intents:
+  - greet
+  - book_flight
+  - search_hotels
+  - search_hotels_from_package
+  - travel_packages
+  - cancel_booking
+  - thank
+  - goodbye
+  - package_detail
+  - show_destinations
+  - choose_hotel
+  - inform
+  - book_hotel
+entities:
+  - package_name
+  - category
+  - location
+  - hotel_name
+  - check_in_date
+  - nights
+  - guests
+  - departure
+  - destination
+  - travel_date
+  
+
+slots:
+  package_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: package_name
+
+  category:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: category
+
+  location:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: location
+
+  hotel_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: hotel_name
+
+  check_in_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: check_in_date
+
+  nights:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: nights
+
+  guests:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: guests
+
+  departure:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: departure
+
+  destination:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: destination
+
+  travel_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: travel_date
+
+responses:
+  utter_greet:
+    - text: "Hi! I'm Qyra, your personal travel assistant. I can help you with:"
+      buttons:
+        - title: "✈️ Book a Flight"
+          payload: "/book_flight"
+        - title: "🏨 Search Hotels"
+          payload: "/search_hotels"
+        - title: "📦 Travel Packages"
+          payload: "/show_packages"
+
+  utter_ask_flight_details:
+    - text: "Sure! Please provide your departure and destination cities."
+
+  utter_showing_hotels:
+  - text: |
+      Here are some hotel options for {location}:
+    buttons:
+      - title: "Book a Hotel"
+        payload: '/book_hotel{"hotel_name"}'
+      - title: "Book a Flight"
+        payload: /book_flight
+      - title: "Back to package"
+        payload: /travel_packages
+
+  utter_ask_cancel_details:
+    - text: "Please provide your booking ID to proceed with cancellation."
+
+  utter_thank:
+    - text: "You're welcome! Let me know if you need anything else."
+
+  utter_goodbye:
+    - text: "Goodbye! Have a great trip!"
+
+  ## Form slot questions
+  utter_ask_check_in_date:
+    - text: "What is your check-in date?"
+
+  utter_ask_nights:
+    - text: "How many nights will you stay?"
+
+  utter_ask_guests:
+    - text: "How many guests will be staying?"
+
+  utter_ask_departure:
+    - text: "Where are you departing from?"
+
+  utter_ask_destination:
+    - text: "Where are you flying to?"
+
+  utter_ask_travel_date:
+    - text: "What is your travel date?"
+
+  utter_submit_booking:
+    - text: "✅ Booking confirmed at *{hotel_name}* from *{check_in_date}* for *{nights}* night(s) with *{guests}* guest(s)."
+
+  utter_submit_flight:
+    - text: "✅ Your flight is booked from *{departure}* to *{destination}* on *{travel_date}*."
+
+forms:
+  hotel_booking_form:
+    required_slots:
+      - hotel_name
+      - check_in_date
+      - nights
+      - guests
+
+  flight_booking_form:
+    required_slots:
+      - departure
+      - destination
+      - travel_date
+
+actions:
+  - action_book_flight
+  - action_cancel_booking
+  - action_save_message
+  - action_show_packages
+  - action_package_detail
+  - action_show_categories
+  - action_show_destinations
+  - action_show_hotels_by_location
+  - validate_hotel_booking_form
+  - action_submit_hotel_booking
+  - validate_flight_booking_form
+  - action_submit_flight_booking

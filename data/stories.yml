@@ -1,0 +1,116 @@
+version: "3.1"
+
+stories:
+- story: greet user with options
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: action_save_message
+
+- story: book a flight flow
+  steps:
+    - intent: book_flight
+    - action: flight_booking_form
+    - active_loop: flight_booking_form
+    - intent: inform
+      entities:
+        - departure: "Delhi"
+    - intent: inform
+      entities:
+        - destination: "Goa"
+    - intent: inform
+      entities:
+        - travel_date: "2025-08-10"
+    - action: flight_booking_form
+    - active_loop: null
+    - action: utter_submit_flight
+    - action: action_submit_flight_booking
+    - action: action_save_message
+
+- story: search hotels flow
+  steps:
+    - intent: search_hotels
+    - action: utter_showing_hotels
+    - action: action_show_hotels_by_location
+    - action: action_save_message
+
+- story: show hotels from package flow
+  steps:
+    - intent: package_detail
+      entities:
+        - package_name: "Darjeeling Delight"
+    - action: action_package_detail
+    - slot_was_set:
+        - location: "Darjeeling"
+    - intent: search_hotels_from_package
+    - action: action_show_hotels_by_location
+    - action: action_save_message
+
+- story: travel packages flow
+  steps:
+    - intent: travel_packages
+    - action: action_show_categories
+    - action: action_save_message
+
+- story: destination listing flow
+  steps:
+    - intent: show_destinations
+    - action: action_show_destinations
+    - action: action_save_message
+
+- story: show any package detail
+  steps:
+    - intent: package_detail
+    - action: action_package_detail
+    - action: action_save_message
+
+- story: cancel booking flow
+  steps:
+    - intent: cancel_booking
+    - action: utter_ask_cancel_details
+    - action: action_cancel_booking
+    - action: action_save_message
+
+- story: user says thank you
+  steps:
+    - intent: thank
+    - action: utter_thank
+    - action: action_save_message
+
+- story: user says goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+    - action: action_save_message
+
+- story: book hotel via hotel card
+  steps:
+    - intent: book_hotel
+      entities:
+        - hotel_name: "Snowpeak Resort"
+    - action: hotel_booking_form
+    - active_loop: hotel_booking_form
+    - slot_was_set:
+        - hotel_name: "Snowpeak Resort"
+    - intent: inform
+      entities:
+        - check_in_date: "2025-07-27"
+    - intent: inform
+      entities:
+        - nights: "3"
+    - intent: inform
+      entities:
+        - guests: "2"
+    - action: hotel_booking_form
+    - active_loop: null           # ← IMPORTANT
+    - action: utter_submit_booking
+    - action: action_submit_hotel_booking
+    - action: action_save_message
+
+- story: Hotel booking from card
+  steps:
+    - intent: book_hotel
+      entities:
+        - hotel_name: "Hillside Retreat"
+    - action: hotel_booking_form
+    - active_loop: hotel_booking_form

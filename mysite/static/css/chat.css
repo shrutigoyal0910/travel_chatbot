@@ -1,0 +1,606 @@
+
+:root {
+  --bg-color: #f1f5f9;
+  --bot-bg: #6366f1;
+  --user-bg: #3b82f6;
+  --text-color: #000;
+  --card-bg: #fff;
+}
+
+body.dark {
+  --bg-color: #1e293b;
+  --bot-bg: #8b5cf6;
+  --user-bg: rgb(41, 94, 207);
+  --text-color: #f1f5f9;
+  --card-bg: #334155;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: var(--text-color);
+  transition: background 0.4s, color 0.4s;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-bar {
+  width: 420px;
+  text-align: right;
+  padding-top: 10px;
+}
+
+.logout-bar a {
+  color: #f43f5e;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+
+.chat-container {
+  background: var(--card-bg);
+  width: 420px;
+  height: 680px;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 0.4s;
+}
+
+.chat-header {
+  background: linear-gradient(to right, #2f54eb, rgb(207 8 8 / 23%));
+  color: white;
+  padding: 1px 10px;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  height: 90px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.bot-header-icon-large {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  border-radius: 12px;
+  background-color: transparent;
+  flex-shrink: 0;
+}
+
+.bot-title-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.bot-title-area h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.bot-title-area small {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #e0e7ff;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  transition: background 0.4s;
+}
+
+/* Approach 1: Show Full Card at Once */
+.card-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px 0;
+  width: 100%;
+  min-height: 680px;
+  box-sizing: border-box;
+}
+
+/* Approach 2: Add Visible Scrollbar (Uncomment to use) */
+/*
+.card-carousel {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+  min-height: 260px;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #e5e7eb;
+}
+.card-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.card-carousel::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+.card-carousel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.card-carousel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+*/
+
+.hotel-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 340px;
+  height: 280px;
+  margin: 12px auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.hotel-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.hotel-details {
+  padding: 5px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.hotel-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hotel-location,
+.hotel-rating,
+.hotel-price,
+.hotel-amenities {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #4b5563;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hotel-buttons {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hotel-buttons button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #5a76e9e0;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+.hotel-buttons button:hover {
+  background-color: #1e40af;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+  .hotel-card {
+    max-width: 220px;
+    height: 220px;
+  }
+  .hotel-image {
+    height: 130px;
+  }
+  .hotel-title {
+    font-size: 16px;
+  }
+  .hotel-location,
+  .hotel-rating,
+  .hotel-price,
+  .hotel-amenities {
+    font-size: 13px;
+  }
+  .hotel-buttons button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hotel-card {
+    max-width: 180px;
+    height: 200px;
+  }
+  .hotel-image {
+    height: 110px;
+  }
+  .hotel-title {
+    font-size: 14px;
+  }
+  .hotel-location,
+  .hotel-rating,
+  .hotel-price,
+  .hotel-amenities {
+    font-size: 12px;
+  }
+  .hotel-buttons button {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  max-width: 100%;
+  margin: 10px 0;
+  animation: fadeIn 0.3s ease-in-out;
+  flex-direction: column;
+}
+
+.user {
+  align-self: flex-end;
+  flex-direction: column;
+}
+
+.bot {
+  align-self: flex-start;
+  flex-direction: column;
+}
+
+.message-text {
+  padding: 12px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #adb9ebe3;
+  color: #000;
+  line-height: 1.5;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.user .message-text {
+  background-color: #b382ebd4;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 5px 0;
+}
+
+.input-container {
+  display: flex;
+  border-top: 1px solid #ddd;
+  background-color: var(--card-bg);
+  transition: background 0.4s;
+}
+
+input {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+button {
+  padding: 0 16px;
+  background-color: var(--user-bg);
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+.ai-button {
+  background-color: #8b5cf6; /* Purple for AI */
+}
+
+.ai-button:hover {
+  background-color: #6b21a8;
+}
+
+.mic-button {
+  background-color: #10b981;
+}
+
+.mic-button:hover {
+  background-color: #059669;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--bot-bg);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  margin: 10px 0;
+  align-self: flex-start;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chat-button {
+  padding: 8px 12px;
+  border: 2px solid #6366f1;  /* Visible boundary color */
+  border-radius: 12px;
+  background-color: #d2d5e180;     /* Light background */
+  color: #111827;              /* Dark text */
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.chat-button:hover {
+  background-color: #6366f1;   /* On hover, fill with border color */
+  color: white;
+}
+
+
+#chatBox {
+  max-width: 100%;
+  height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #e5e7eb;
+  box-sizing: border-box;
+}
+
+.chat-button:hover {
+  background-color: #c7d2fe;
+}
+
+
+
+.flight-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 340px;
+    height: 280px;
+    margin: 12px auto;
+    font-family: 'Poppins', sans-serif;
+}
+.flight-details {
+    padding: 5px;
+    flex: 1;
+    overflow: hidden;
+}
+.flight-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.flight-route, .flight-price, .flight-departure, .flight-seats {
+    margin: 4px 0;
+    font-size: 14px;
+    color: var(--text-color);
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.flight-buttons {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.flight-buttons button {
+    padding: 6px 12px;
+    border: none;
+    background-color: var(--user-bg);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+.flight-buttons button:hover {
+    background-color: #1e40af;
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    align-self: flex-start;
+    margin: 10px;
+}
+.typing-indicator span {
+    width: 10px;
+    height: 10px;
+    background: var(--bot-bg);
+    border-radius: 50%;
+    animation: bounce 0.6s infinite alternate;
+}
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+@keyframes bounce {
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+
+
+.chat-footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #c9d1d9;
+  border-top: 1px solid #e5e7eb;
+  padding: 6px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #e2e8f0;
+  border-radius: 12px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  padding: 10px;
+  outline: none;
+  color: var(--text-color);
+}
+
+.input-wrapper button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  
+  height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid rgb(88 96 137 / 54%);
+  padding-top: 8px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 15px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.nav-item span {
+  font-size: 25px;
+  margin-bottom: 0px;
+}
+
+.nav-item.active {
+  color: var(--bot-bg);
+}
+
+
+
+.icon-clear-btn {
+  background-color: #f43f5e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-clear-btn:hover {
+  background-color: #e11d48;
+  transform: scale(1.05);
+}
+
+.icon-clear-btn:active {
+  transform: scale(0.95);
+}

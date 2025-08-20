@@ -1,0 +1,91 @@
+version: "3.1"
+
+rules:
+- rule: Greet the user and show options
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: action_save_message
+
+- rule: Handle flight booking
+  steps:
+    - intent: book_flight
+    - action: flight_booking_form
+    - active_loop: flight_booking_form
+
+- rule: Submit flight booking form
+  condition:
+    - active_loop: flight_booking_form
+  steps:
+    - action: flight_booking_form
+    - active_loop: null
+    - action: utter_submit_flight
+    - action: action_submit_flight_booking
+    - action: action_save_message
+
+- rule: Respond to hotel search
+  steps:
+    - intent: search_hotels
+    - action: utter_showing_hotels
+    - action: action_show_hotels_by_location
+    - action: action_save_message
+
+- rule: Show hotels from package rule
+  steps:
+    - intent: search_hotels_from_package
+    - action: action_show_hotels_by_location
+    - action: action_save_message
+
+- rule: Show travel packages
+  steps:
+    - intent: travel_packages
+    - action: action_show_categories
+    - action: action_save_message
+
+- rule: Show destinations in category
+  steps:
+    - intent: show_destinations
+    - action: action_show_destinations
+    - action: action_save_message
+
+- rule: Handle booking cancellation
+  steps:
+    - intent: cancel_booking
+    - action: utter_ask_cancel_details
+    - action: action_cancel_booking
+    - action: action_save_message
+
+- rule: Respond to thanks
+  steps:
+    - intent: thank
+    - action: utter_thank
+    - action: action_save_message
+
+- rule: Say goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+    - action: action_save_message
+
+- rule: Trigger hotel booking form
+  steps:
+    - intent: choose_hotel
+    - action: hotel_booking_form
+    - active_loop: hotel_booking_form
+
+- rule: Submit hotel booking form
+  condition:
+    - active_loop: hotel_booking_form
+  steps:
+    - action: hotel_booking_form
+    - active_loop: null
+    - action: utter_submit_booking
+    - action: action_submit_hotel_booking
+    - action: action_save_message
+
+- rule: Book hotel from card
+  steps:
+    - intent: book_hotel
+    - action: hotel_booking_form
+    - active_loop: hotel_booking_form
+

@@ -1,0 +1,146 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - good morning
+    - hey there
+
+- intent: book_flight
+  examples: |
+    - I want to book a flight
+    - Book a ticket
+    - I need to fly to Delhi
+    - Can you help me with a flight?
+
+- intent: book_hotel
+  examples: |
+    - I want to book this hotel
+    - Book now
+    - Book [Snowpeak Resort](hotel_name)
+    - I want to book [Hillside Retreat](hotel_name)
+    - Let's book this one
+
+
+- intent: search_hotels
+  examples: |
+    - I want to search hotels
+    - Find me a hotel
+    - Show hotels
+    - Search hotels near me
+    - Find hotels in [Shimla, Himachal Pradesh](location)
+    - Show hotels in [Nainital](location)
+    - Search for hotels in [Manali](location)
+    - I want hotels in [Goa](location)
+    - Any hotels in [Ladakh](location)?
+
+- intent: search_hotels_from_package
+  examples: |
+    - show me hotels
+    - find hotel
+    - search hotel
+    - hotel options
+    - search hotels
+    - I want to book a hotel
+
+- intent: travel_packages
+  examples: |
+    - Show me travel packages
+    - Any family trip packages?
+    - I want to see holiday offers
+    - What travel deals do you have?
+
+- intent: show_destinations
+  examples: |
+    - Show me beach holidays
+    - I want mountain destinations
+    - List city travel options
+    - What places are there in beach category?
+
+- intent: package_detail
+  examples: |
+    - Tell me about [Beach Holiday](package_name)
+    - Show me details for the [City Tour](package_name)
+    - What is included in the [Mountain Adventure](package_name)?
+
+- intent: cancel_booking
+  examples: |
+    - Cancel my ticket
+    - I want to cancel my booking
+    - How do I cancel my reservation?
+
+- intent: thank
+  examples: |
+    - thanks
+    - thank you
+    - appreciate it
+
+- intent: goodbye
+  examples: |
+    - bye
+    - see you
+    - goodbye
+
+- intent: choose_hotel
+  examples: |
+    - I want to book [Hotel Paradise](hotel_name)
+    - Book [Sunrise Inn](hotel_name)
+    - Reserve [Island Breeze Resort](hotel_name)
+    - Book hotel [Sea View Hotel](hotel_name)
+    - Choose [Himalayan Heights](hotel_name)
+
+- intent: inform
+  examples: |
+    - I will stay for [3](nights) nights
+    - Planning for [2](nights) nights stay
+    - It’s a [4](nights) night trip
+    - My booking is for [5](nights) nights
+    - Staying [2](nights) nights
+    - For [3](nights) nights
+    - [4](nights) nights total
+    - Book for [2](guests) guests and [3](nights) nights
+    - [1](guests) person, [2](nights) nights
+    - [3](nights) nights
+    - [2](guests) guests
+    - 2 guests
+    - we are [2](guests) guests
+    - I need a room for [1](guests) guest
+    - Just [1](guests) person
+    - [3](guests) people will stay
+    - We are [4](guests) adults
+    - Just me
+    - I'm alone
+    - [2025-07-25](check_in_date)
+    - Check-in on [2025-08-15](check_in_date)
+    - My check-in date is [2025-09-01](check_in_date)
+    - Check in date is [2025-08-10](check_in_date)
+    - Leaving from [Delhi](departure) to [Mumbai](destination) on [2025-08-05](travel_date)
+    - Fly from [Chennai](departure) to [Bangalore](destination)
+    - My travel date is [2025-09-10](travel_date)
+
+    
+- regex: nights
+  examples: |
+    - [1-9]
+
+- regex: guests
+  examples: |
+    - [1-9]
+
+- regex: travel_date
+  examples: |
+    - \d{4}-\d{2}-\d{2}
+
+- regex: check_in_date
+  examples: |
+    - \d{4}-\d{2}-\d{2}
+
+- regex: departure
+  examples: |
+    - [A-Za-z ]+
+
+- regex: destination
+  examples: |
+    - [A-Za-z ]+
