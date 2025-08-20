@@ -28,17 +28,17 @@ Qyra helps users explore flights, hotels, and travel tips while supporting natur
 ## 📂 Project Structure  
 
 Chatbot_project/
-│── actions/ # Custom Rasa actions
-│── data/ # NLU, stories, and rules
-│── mysite/ # Django project
-│ ├── chatbot/ # Django app
-│ ├── templates/ # HTML files
-│ ├── static/ # CSS, JS, images
-│── tests/ # Rasa test stories
-│── domain.yml # Rasa domain file
-│── endpoints.yml # Rasa endpoints
-│── config.yml # Rasa pipeline & policies
-│── requirements.txt # Dependencies
+│── actions/          # Custom Rasa actions
+│── data/             # NLU, stories, and rules
+│── mysite/           # Django project
+│ ├── chatbot/        # Django app
+│ ├── templates/      # HTML files
+│ ├── static/         # CSS, JS, images
+│── tests/            # Rasa test stories
+│── domain.yml        # Rasa domain file
+│── endpoints.yml     # Rasa endpoints
+│── config.yml        # Rasa pipeline & policies
+│── requirements.txt  # Dependencies
 │── .gitignore
 │── README.md
 
