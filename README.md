@@ -51,7 +51,7 @@ Chatbot_project/
 ```bash
 git clone https://github.com/shrutigoyal0910/travel_chatbot.git
 cd travel_chatbot
-
+```
 ### 2️⃣ Create Virtual Environment & Install Dependencies
 ```bash
 python -m venv venv
