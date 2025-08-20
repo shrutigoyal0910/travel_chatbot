@@ -26,7 +26,7 @@ Qyra helps users explore flights, hotels, and travel tips while supporting natur
 ---
 
 ## 📂 Project Structure  
-
+```
 Chatbot_project/
 │── actions/          # Custom Rasa actions
 │── data/             # NLU, stories, and rules
