@@ -51,3 +51,43 @@ Chatbot_project/
 ```bash
 git clone https://github.com/shrutigoyal0910/travel_chatbot.git
 cd travel_chatbot
+
+### 2️⃣ Create Virtual Environment & Install Dependencies
+```bash
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
+
+pip install -r requirements.txt
+
+### 3️⃣ Set Environment Variables
+Create a .env file inside the project root:
+
+```env
+DEEPSEEK_API_KEY=your_openrouter_api_key_here
+
+### 4️⃣ Run Django Server
+```bash
+
+cd mysite
+python manage.py migrate
+python manage.py runserver
+👉 Access at: http://127.0.0.1:8000/
+
+### 5️⃣ Run Rasa Server (in a new terminal)
+```bash
+rasa train
+rasa run actions
+rasa run --enable-api
+
+### 💬 Usage
+Open http://127.0.0.1:8000/ in your browser.
+Login/Signup to your account.
+Start chatting with Qyra – your travel assistant 🚀
+
+Example Messages:
+"hello" → AI greeting + travel suggestions
+"book flight from Delhi to Goa" → Flight booking flow
+"find hotels in Manali" → Hotel search
+"show me travel packages" → Package browsing
+"cancel my booking 1234" → Cancels booking with ID
